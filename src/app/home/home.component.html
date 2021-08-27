@@ -1,0 +1,525 @@
+<!-- Sticky header bar -->
+<ActionBar title="" flat="false" backgroundColor="white">
+    <GridLayout width="100%" columns="auto,*,auto,auto" orientation="horizontal">
+        <Image src="~/fonts/homer_simpson.png" width="44" height="44"
+            borderRadius="100" ios:paddingLeft="10" android:paddingTop="10"
+            borderColor="black" borderWidth="3" col="0"
+            horizontalAlignment="left" backgroundColor="white"></Image>
+        <Label [text]="bell.text" class="fa-solid m-r-2" fontSize="18" color="black"
+            col="2"></Label>
+        <Label [text]="settings.text" class="fa-solid m-l-2" fontSize="21"
+            color="black" col="3"></Label>
+        <StackLayout col="1" orientation="horizontal">
+            
+            <StackLayout class="brand_background">
+                <Label text="#Hestia" fontSize="12" fontWeight="600" color="white"></Label>
+            </StackLayout>
+            
+            <StackLayout class="username_background" (tap)="copyUserName()">
+                <Label id="username" [text] = "username" fontSize="12" fontWeight="600" color="white"></Label>
+            </StackLayout>
+
+        </StackLayout>
+    </GridLayout>
+    <!--<ActionItem ios.position="left">
+        <StackLayout>
+            <Image src="~/fonts/homer_simpson.png" width="44" height="44"
+                borderRadius="100" class="m-l-10" borderColor="black"
+                borderWidth="3"></Image>
+        </StackLayout>
+    </ActionItem>
+    <ActionItem ios.position="right" android.position="actionBarIfRoom">
+        <Label [text]="bell.text" class="fa-solid" fontSize="18"
+            color="black"></Label>
+    </ActionItem>
+    <ActionItem ios.position="right" android.position="actionBarIfRoom">
+        <Label [text]="settings.text" class="fa-solid" fontSize="21"
+            color="black"></Label>
+    </ActionItem>-->
+</ActionBar>
+
+<GridLayout rows="*,auto">
+    <GridLayout row="0">
+        <Tabs #tabs selectedIndex="0"
+            (selectedIndexChanged)="onSelectedIndexChanged($event)">
+
+            <!-- Todo List feature -->
+            <TabContentItem [backgroundColor]="tabList[0].backgroundColor">
+                <StackLayout class="m-b-10">
+                    <!-- Title -->
+                    <StackLayout class="m-t-5" orientation="horizontal"
+                        horizontalAlignment="center">
+                        <Label text="Tasks" class="h1 m-r-2"
+                            horizontalAlignment="center" fontWeight="800"
+                            color="black">
+                        </Label>
+                        <Label text="Today" class="h1 m-l-2"
+                            horizontalAlignment="center" fontWeight="200"
+                            color="black">
+                        </Label>
+                    </StackLayout>
+
+                    <!-- Today display & timeline scroll -->
+                    <GridLayout rows="auto, *" height="100%" width="100%" columns="*,auto" *ngIf="taskList.length!==0">
+                        <StackLayout row="0" col="0" colSpan="2" class="m-r-10 m-l-10" borderWidth="0.5 0.5 1.5 0.5" borderRadius="16 16 0 0" borderColor="black" backgroundColor="white">
+                            <Label [text]="today" fontSize="20" fontWeight="600" horizontalAlignment="center" color="black"></Label>
+                        </StackLayout>
+                        <ScrollView id="timeline" row="1" col="0" colSpan="2" borderRadius="0 0 16 16" borderWidth="0 0.5 0.9 0.5" class="m-r-10 m-l-10" backgroundColor="white" (loaded)="scrollToCurrentHour($event)" (swipe)="animateFab($event)">
+                            <!-- Still thinking of a better, more efficient way to loop and make these static labels, pls don't criticize me :( -->
+                            <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,50" class="m-l-5 m-b-15 m-r-15">
+                                <Label col="0" row="0" text="00:00" fontSize="18" fontWeight="500" class="m-r-15" color="black"></Label>
+                                <Label col="0" row="1" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="2" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="3" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="4" text="01:00" fontSize="18" fontWeight="500" color="black"></Label>
+                                
+                                <Label col="0" row="5" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="6" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="7" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="8" text="02:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="9" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="10" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="11" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="12" text="03:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="13" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="14" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="15" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="16" text="04:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="17" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="18" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="19" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="20" text="05:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="21" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="22" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="23" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="24" text="06:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="25" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="26" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="27" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="28" text="07:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="29" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="30" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="31" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="32" text="08:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="33" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="34" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="35" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="36" text="09:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="37" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="38" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="39" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="40" text="10:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="41" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="42" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="43" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="44" text="11:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="45" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="46" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="47" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="48" text="12:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="49" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="50" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="51" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="52" text="13:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="53" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="54" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="55" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="56" text="14:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="57" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="58" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="59" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="60" text="15:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="61" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="62" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="63" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="64" text="16:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="65" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="66" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="67" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="68" text="17:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="69" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="70" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="71" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="72" text="18:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="73" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="74" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="75" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="76" text="19:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="77" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="78" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="79" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="80" text="20:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="81" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="82" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="83" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="84" text="21:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="85" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="86" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="87" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="88" text="22:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="89" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="90" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="91" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="92" text="23:00" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <Label col="0" row="93" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="94" text="&mdash;" fontSize="24" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="95" text="-" fontSize="20" fontWeight="500" color="black"></Label>
+                                <Label col="0" row="96" text="23:59" fontSize="18" fontWeight="500" color="black"></Label>
+
+                                <!-- Todo time slot -->
+                                <StackLayout col="1" *ngFor="let task of taskList;let i=index;" [row]="convertStartToRow(task.start)-1" , [rowSpan]="convertDurationToSpan(task.start, task.end)+1" borderRadius="10" borderWidth="0.5 0.5 1.2 0.5" [backgroundColor]="task.backgroundColor" class="m-b-15 m-t-10">
+                                    <GridLayout rows="auto,auto,auto,auto" columns="*,auto" class="m-l-5">
+                                        <StackLayout row="0" col="0" orientation="horizontal">
+                                            <Image [src]="getIsCompletedTask(task)[1]" width="20" height="20" class="m-r-5" (tap)="setIsCompleted(task)" verticalAlignment="middle"></Image>
+                                            <Label [text]="task.title" [textDecoration]="getIsCompletedTask(task)[0]" fontSize="17" fontWeight="600"  color="black"></Label>
+                                        </StackLayout>
+                                        
+                                        <Label row="1" col="0" [text]="task.start + ' - ' + task.end" fontSize="14"  color="black"></Label>
+                                        <Label row="1" col="0" [text]="getDuration(task.start, task.end)" color="blue" fontSize="14" horizontalAlignment="right" class="m-r-5"></Label>
+                                        <WrapLayout row="2" col="0">
+                                            <Image horizontalAlignment="left" [src]="'~/fonts/'+member" width="30" height="30" borderRadius="100" *ngFor="let member of task.members" class="m-r-2 m-l-2 m-b-5" borderWidth="1" backgroundColor="white"></Image>
+                                        </WrapLayout>
+                                        <Label row="3" col="0" textWrap="true" *ngIf="task.notes.trim() !== ''">
+                                            <FormattedString>
+                                                <Span text="Notes" textDecoration="underline" color="black"></Span>
+                                                <Span [text]="': ' + task.notes" color="black"></Span>
+                                            </FormattedString>
+                                        </Label>
+                                        <StackLayout row="0" rowSpan="3" col="1">
+                                            <Image src="~/fonts/edit_icon.png" width="20" height="20" margin="5" (tap)="showTaskModal(i)"></Image>
+                                            <Image src="~/fonts/delete_icon.png" width="20" height="20" margin="5" (tap)="deleteTask(i)"></Image>
+                                        </StackLayout>
+                                    </GridLayout>
+                                </StackLayout>
+
+                            </GridLayout>
+                        </ScrollView>
+                        <GridLayout id="fab_add_task" borderRadius="100" backgroundColor="#9dc88d" width="50" (tap)="showTaskModal(-1)" row="1" col="1" verticalAlignment="bottom" class="m-b-10 m-r-20">
+                            <StackLayout orientation="horizontal">
+                                <Image src="~/fonts/add_icon.png" borderRadius="100" width="50" height="50"></Image>
+                                <Label text="Add Task" fontSize="16" fontWeight="600" verticalAlignment="middle" horizontalAlignment="center" color="black"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                    </GridLayout>
+                    <!-- Relax View -->
+                    <GridLayout width="100%" height="100%" rows="*,auto" *ngIf="taskList.length===0">
+                        <Image row="0" src="~/fonts/relax.png" class="m-l-20 m-r-20"></Image>
+                        <StackLayout row="1" horizontalAlignment="center" orientation="horizontal" class="m-b-20">
+                            <Label text="Want more challenges?" fontSize="20" fontWeight="600" color="black" class="m-r-10" verticalAlignment="middle"></Label>
+                            <GridLayout borderRadius="100" backgroundColor="#9dc88d" width="130" (tap)="showTaskModal(-1)">
+                                <StackLayout orientation="horizontal">
+                                    <Image src="~/fonts/add_icon.png" borderRadius="100" width="50" height="50"></Image>
+                                    <Label text="Add Task" fontSize="16" fontWeight="600" verticalAlignment="middle" horizontalAlignment="center" color="black"></Label>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </TabContentItem>
+
+            <!-- Calendar Overview feature -->
+            <TabContentItem [backgroundColor]="tabList[1].backgroundColor">
+                <GridLayout rows="auto,*" class="m-b-10">
+                    <!-- Title -->
+                    <GridLayout columns="auto,*,auto" row="0" backgroundColor="#9dc88d" class="m-r-10 m-l-10 m-t-10">
+                        <!--
+                        <StackLayout col="0" width="20" height="20" backgroundColor="white" verticalAlignment="middle" class="m-l-10"></StackLayout>
+                        <StackLayout col="2" width="20" height="20" backgroundColor="white" verticalAlignment="middle" class="m-r-10"></StackLayout>
+                        -->
+                        <StackLayout col="1" orientation="horizontal" 
+                            horizontalAlignment="center">
+                            <Label text="Calendar" class="h1 m-r-2"
+                                horizontalAlignment="center" fontWeight="800"
+                                color="black">
+                            </Label>
+                            <Label text="Overview" class="h1 m-l-2"
+                                horizontalAlignment="center" fontWeight="200"
+                                color="black">
+                            </Label>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <!-- Calendar -->
+                    <RadCalendar row="1" height="400" verticalAlignment="top" class="m-l-10 m-r-10" borderWidth="2" borderColor="black" selectionMode="Single" [eventSource]="calendar_events" eventsViewMode="Inline">
+                    </RadCalendar>
+                </GridLayout>
+            </TabContentItem>
+
+
+            <!-- Home and user page -->
+            <TabContentItem [backgroundColor]="tabList[2].backgroundColor">
+                <StackLayout class="m-b-10">
+                    <Label [text]="user_greetings_text"
+                        class="user_text m-t-15 m-l-5" color="black"></Label>
+                    <StackLayout class="m-t-15 m-b-30"
+                        orientation="horizontal" horizontalAlignment="center">
+                        <Label text="Tasks" class="m-r-2"
+                            horizontalAlignment="center" fontWeight="800"
+                            fontSize="22" color="black">
+                        </Label>
+                        <Label text="Today" class="m-l-2"
+                            horizontalAlignment="center" fontWeight="200"
+                            fontSize="22" color="black">
+                        </Label>
+                    </StackLayout>
+                    <GridLayout class="spacing_between_modules"
+                        columns="*, *">
+                        <StackLayout col="0">
+                            <Label text="Meals" fontSize="20" fontWeight="500"
+                                class="text-center" color="black"></Label>
+                        </StackLayout>
+                        <StackLayout col="1">
+                            <Label text="Budget" fontSize="20"
+                                fontWeight="500" class="text-center"
+                                color="black"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </TabContentItem>
+
+
+            <!-- Meal plans & grocery list feature -->
+            <TabContentItem [backgroundColor]="tabList[3].backgroundColor">
+                <StackLayout class="m-b-10">
+                    <StackLayout class="m-t-5" orientation="horizontal"
+                        horizontalAlignment="center">
+                        <Label text="Meals" class="h1 m-r-2"
+                            horizontalAlignment="center" fontWeight="800"
+                            color="black">
+                        </Label>
+                        <Label text="Menu" class="h1 m-l-2"
+                            horizontalAlignment="center" fontWeight="200"
+                            color="black">
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </TabContentItem>
+
+
+            <!-- Budget feature -->
+            <TabContentItem [backgroundColor]="tabList[4].backgroundColor">
+                <GridLayout rows="auto,*" class="m-b-10">
+                    <!-- Title -->
+                    <StackLayout row="0" class="m-t-5" orientation="horizontal"
+                        horizontalAlignment="center">
+                        <Label text="Budget" class="h1 m-r-2"
+                            horizontalAlignment="center" fontWeight="800"
+                            color="black">
+                        </Label>
+                        <Label text="Wallet" class="h1 m-l-2"
+                            horizontalAlignment="center" fontWeight="200"
+                            color="black">
+                        </Label>
+                    </StackLayout>
+
+                    <GridLayout row="1" rows="auto,*,auto" class="m-l-10 m-r-10">
+                        <!--
+                        Toggle bar 
+                        <GridLayout row="0" #togglebar class="toggle" columns="*,*" (loaded)="onToggleLoaded($event)" verticalAlignment="middle" horizontalAlignment="center">
+                            <Label id="toggler" class="toggler"></Label>
+                            <Label col="0" color="black" text="Personal" fontSize="16" fontWeight="600" class="toggle-lbl text-center"></Label>
+                            <Label col="1" color="black" text="Household" fontSize="16" fontWeight="600" class="toggle-lbl text-center"></Label>
+                        </GridLayout>
+                        -->
+                        <GridLayout width="100%" columns="*,auto" class="m-l-5 m-r-5">
+                            <StackLayout col="0" backgroundColor="#9dc88d" class="m-r-10" padding="10" borderRadius="10" (tap)="selectBudget()">
+                                <Label text="Choose a budget 🔎" fontSize="16" fontWeight='500' color="black" class="text-center" verticalAlignment="center"></Label>
+                            </StackLayout>
+                            <!--
+                            <StackLayout col="1" backgroundColor="#000000" padding="10" borderRadius="10" (tap)="manageBudgetAccess()">
+                                <Label text="Manage member access 👀" fontSize="13" fontWeight='500' color="white" class="text-center" textWrap="true"></Label>
+                            </StackLayout>
+                            -->
+                            <StackLayout col="1" width="50" height="50" borderRadius="100" backgroundColor="black" (tap)="manageBudgetAccess()" horizontalAlignment="center"></StackLayout>
+                            <StackLayout col="1" width="44" height="44" borderRadius="100" backgroundColor="gray" (tap)="manageBudgetAccess()" horizontalAlignment="center"></StackLayout>
+                            <StackLayout col="1" width="38" height="38" borderRadius="100" backgroundColor="silver" (tap)="manageBudgetAccess()" horizontalAlignment="center"></StackLayout>
+                            <Image col="1" [src]="'~/fonts/' + budget.owner" width="35" height="35" borderRadius="100" (tap)="manageBudgetAccess()" horizontalAlignment="center"></Image>
+                        </GridLayout>
+
+                        <!-- Budget list -->
+                        <StackLayout row="2" class="m-l-15" width="100%" height="205">
+                            <GridLayout class="m-t-5" columns="*,auto" height="30">
+                                <StackLayout col="1" orientation="horizontal" class="m-r-10 m-t-2">
+                                    <Label text="Edit" fontSize="15" fontWeight="600" color="#0071bc" class="m-r-2"></Label>
+                                    <Label [text]="pen" fontSize="15" fontWeight="600" color="#0071bc" class="fa-solid m-l-2"></Label>
+                                </StackLayout>
+                                <ScrollView orientation="horizontal" class="m-r-15">
+                                    <Label col="0">
+                                        <FormattedString>
+                                            <Span [text]="budget.name+' '" fontSize="18" fontWeight="bold" color="black"></Span>
+                                            <Span [text]="' (' + budget.startDate + ' - ' + budget.endDate + ')'" color="gray"></Span>
+                                        </FormattedString>
+                                    </Label>
+                                </ScrollView>
+                            </GridLayout>
+
+                            <ScrollView class="m-r-10 m-t-5" height="165" orientation="horizontal">
+                                <StackLayout orientation="horizontal">
+                                    <GridLayout rows="auto,auto,25,auto,*" borderWidth="0.5 0.5 1.2 0.5" *ngFor="let p_budget of personal_budget;let i=index;" class="m-l-10 m-r-10 budget_background" [backgroundImage]="getBudgetBackground(p_budget)" width="130" height="160" borderRadius="15">
+                                        <Image row="0" class="m-r-5 m-t-5" horizontalAlignment="right" src="~/fonts/delete_icon_2.png" width="17" height="17" (tap)="deleteBudget(i)"></Image>
+                                        <Image row="0" class="m-t-10" marginLeft="7" horizontalAlignment="left" [src]="'~/fonts/'+p_budget.createdBy" width="25" height="25" borderRadius="100" borderWidth="2"></Image>
+                                        <StackLayout row="0" class="m-t-5" horizontalAlignment="center" [backgroundColor]="getColorTag(p_budget)" width="40" height="10" borderRadius="3"></StackLayout>
+                                        <Label row="1" fontSize="17" fontWeight="700" [text]="getBudgetItemTitle(p_budget)[0]" class="m-t-5" [color]="getBudgetColor(p_budget)" horizontalAlignment="center"></Label>
+                                        <Label row="2" fontSize="13" fontWeight="500" [text]="getBudgetItemTitle(p_budget)[1]" [color]="getBudgetColor(p_budget)" horizontalAlignment="center" veticalAlignment="center"></Label>
+                                        <Label row="3" fontSize="11" [text]="p_budget.date" [color]="getBudgetColor(p_budget)" horizontalAlignment="center"></Label>
+                                        <StackLayout row="4" [class]="getBudgetClass(p_budget)+' m-b-10'" width="102" height="40" borderRadius="4">
+                                            <Label fontWeight="600" [text]="getAmount(p_budget)" [color]="getBudgetColor(p_budget)" margin="10" horizontalAlignment="center" verticalAlignment="center"></Label>
+                                        </StackLayout>
+                                    </GridLayout>
+                                    <StackLayout class="m-l-10 m-r-10 budget_background" backgroundImage="~/fonts/add_budget.png" width="120" height="155" (tap)="addBudget()">
+                                    </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+
+                        <!-- Budget chart summary -->
+                        <GridLayout id="budget_chart_layout" borderWidth="0.5 0.5 1.2 0.5" row="1" width="100%" rows="auto,*" columns="*,auto" backgroundColor="white" borderRadius="10" class="m-t-10">
+                            <Label row="0" col="0" class="m-l-10 m-t-5" text="Expenses chart" fontSize="17" fontWeight="600" color="black"></Label>
+
+                            
+
+                            <!-- Chart -->
+                            <RadPieChart id="expenses_chart" allowAnimation="true" row="1" col="0" backgroundColor="white" class="m-r-30" borderRadius="15" opacity="1" *ngIf="getPersonalExpenses().length!==0">
+                                <DonutSeries tkPieSeries selectionMode="DataPoint" expandRadius="0.1" outerRadiusFactor="1" innerRadiusFactor="0.7" valueProperty="amount" legendLabel="category" [items]="getPersonalExpenses()" [fillColors]="getChartPalette()"></DonutSeries> 
+                            </RadPieChart>
+                            <!--
+                            <RadRadialGauge id="expenses_gauge" row="1" col="0" opacity="0" class="m-r-30 m-t-5 m-b-5">
+                                <RadialScale #myScale tkRadialGaugeScales startAngle="0" sweepAngle="360" minimum="0" maximum="100" radius="1">
+                                    <ScaleStyle tkRadialScaleStyle ticksVisible="false" labelsVisible="false" lineThickness="0"></ScaleStyle>
+                            
+                                    <RadialBarIndicator opacity="0.1" tkRadialScaleIndicators minimum="0" maximum="100" *ngFor="let expense of getPersonalExpenses();let i=index" [location]="getExpenseLocationInGauge(i)">
+                                        <BarIndicatorStyle tkRadialBarIndicatorStyle [fillColor]="shadeColor(getColorTag(expense),90)" [barWidth]="getGaugeBarWidth()"></BarIndicatorStyle>
+                                    </RadialBarIndicator>
+                            
+                                    <RadialBarIndicator tkRadialScaleIndicators *ngFor="let expense of getPersonalExpenses();let i=index" minimum="0" [maximum]="getGaugeValue(expense)" [location]="getExpenseLocationInGauge(i)" isAnimated="true">
+                                        <BarIndicatorStyle tkRadialBarIndicatorStyle cap="Round" [fillColor]="getColorTag(expense)" [barWidth]="getGaugeBarWidth()"></BarIndicatorStyle>
+                                    </RadialBarIndicator>
+                            
+                                </RadialScale>
+                            </RadRadialGauge>
+                            -->
+
+                            <!-- Legends -->
+                            <GridLayout row="1" col="1" rows="auto,*" width="120">
+                                <Label row="0" horizontalAlignment="left" text="Categories" color="black" fontSize="15" fontWeight="500" class="m-t-5"></Label>
+                                <ScrollView row="1" class="m-t-5 m-b-10 m-r-5">
+                                    <StackLayout>
+                                        <StackLayout class="m-b-5" orientation="horizontal" *ngFor="let expense of personal_expenses;let i=index;">
+                                            <StackLayout [backgroundColor]="getLegendColor(i)" width="14" height="14" borderRadius="100" class="m-r-5"></StackLayout>
+                                            <Label [text]="expense.category" fontWeight="400" fontSize="14" class="m-l-2" color="black" textWrap="true"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ScrollView>
+                            </GridLayout>
+
+                            <!-- Summary info -->
+                            <Label id="chart_stat_1" text="Total Income:" fontSize="13" fontWeight="500" row="1" col="0" horizontalAlignment="center" verticalAlignment="center" marginBottom="45" color="black" class="m-r-30"></Label>
+                            <Label id="chart_stat_2" [text]="getTotalIncome()" fontSize="13" fontWeight="600" row="1" col="0" horizontalAlignment="center" verticalAlignment="center" marginBottom="16" color="black" class="m-r-30"></Label>
+                            <Label id="chart_stat_3" text="Net Budget:" fontSize="13" fontWeight="500" row="1" col="0" horizontalAlignment="center" verticalAlignment="center" marginTop="16" color="black" class="m-r-30"></Label>
+                            <Label id="chart_stat_4" [text]="getNet()" fontSize="13" fontWeight="600" row="1" col="0" horizontalAlignment="center" verticalAlignment="center" marginTop="45" color="black" class="m-r-30"></Label>
+
+                            <!-- Modes: Real and Goal -->
+                            <GridLayout row="1" col="0" #togglebar class="toggle m-t-5 m-r-5" columns="*,*" (loaded)="onToggleLoaded($event)" verticalAlignment="top" horizontalAlignment="right">
+                                <Label id="toggler" class="toggler"></Label>
+                                <Label id="0" col="0" color="white" text="Real" fontSize="12" fontWeight="500" class="toggle-lbl text-center" borderWidth="1" borderColor="#9dc88d" borderRadius="2"></Label>
+                                <Label id="1" col="1" color="white" text="Goal" fontSize="12" fontWeight="500" class="toggle-lbl text-center" borderWidth="1" borderColor="#9dc88d" borderRadius="2"></Label>
+                            </GridLayout>
+                        </GridLayout>
+                    </GridLayout>
+                </GridLayout>
+            </TabContentItem>
+        </Tabs>
+    </GridLayout>
+
+    <!-- bottom tabs -->
+    <GridLayout [backgroundColor]="tabList[currentTabIndex].backgroundColor" row="1" height="auto" verticalAlignment="bottom"
+        columns="*, *, *, *, *">
+
+        <!-- base layer -->
+        <AbsoluteLayout col="0" colSpan="5" verticalAlignment="bottom">
+            <GridLayout #tabBGContainer columns="auto, 10, auto, 10, auto">
+                <GridLayout #leftTabs col="0" colSpan="2" height="80"
+                    [backgroundColor]="tabContainer.backgroundColor"
+                    verticalAlignment="bottom" borderRadius="0 68 0 0">
+                </GridLayout>
+                <GridLayout #centerPatch col="1" colSpan="3" height="40"
+                    [backgroundColor]="tabContainer.backgroundColor"
+                    verticalAlignment="bottom"></GridLayout>
+                <GridLayout #rightTabs col="3" colSpan="4" height="80"
+                    [backgroundColor]="tabContainer.backgroundColor"
+                    verticalAlignment="bottom" borderRadius="68 0 0 0">
+                </GridLayout>
+
+                <!-- focus circle -->
+                <!--  -->
+                <GridLayout #centerCircle col="1" colSpan="3" height="100"
+                    width="100"
+                    [backgroundColor]="tabList[currentTabIndex].backgroundColor"
+                    borderRadius="50" verticalAlignment="bottom"
+                    marginBottom="10">
+                    <GridLayout verticalAlignment="center"
+                        horizontalAlignment="center" height="90" width="90"
+                        [backgroundColor]="tabContainer.focusColor"
+                        borderRadius="45"></GridLayout>
+                </GridLayout>
+
+            </GridLayout>
+        </AbsoluteLayout>
+
+        <!-- tab contents -->
+        <GridLayout #tabContents *ngFor="let item of tabList; let i = index"
+            [col]="i" marginTop="20" (tap)="onBottomNavTap(i)"
+            verticalAlignment="middle">
+            <Label class="fa-solid"
+                [text]="item.text" verticalAlignment="middle"
+                horizontalAlignment="center" [color]="item.color"
+                fontSize="22"></Label>
+        </GridLayout>
+
+        <!-- pan layer -->
+        <GridLayout #dragCircle column="0" colSpan="5"
+            (pan)="onCenterCirclePan($event)" verticalAlignment="center"
+            horizontalAlignment="center" height="90" width="90"
+            backgroundColor="transparent" borderRadius="45"></GridLayout>
+    </GridLayout>
+</GridLayout>
+
+<!-- Floating add icon for Tasks tab -->
+<!--
+<AbsoluteLayout *ngIf="currentTabIndex === 0">
+    <Image src="~/fonts/add_icon.png" width="50" height="50" [left]="add_icon_left" [top]="content_height-nav_height-title_height-header_height" (tap)="addTask()"></Image>
+</AbsoluteLayout>
+-->
+
+
+<!-- Floating budget info -->
+<!--
+<AbsoluteLayout *ngIf="currentTabIndex === 4">
+        <Label text="Total Income:" fontSize="12" fontWeight="500" left="97" top="215"></Label>
+        <Label [text]="getTotalIncome()" fontSize="12" fontWeight="600" left="97" top="230"></Label>
+        <Label text="Net Budget:" fontSize="12" fontWeight="500" left="97" top="247"></Label>
+        <Label [text]="getNet()" fontSize="12" fontWeight="600" left="97" top="262"></Label>
+</AbsoluteLayout>
+-->

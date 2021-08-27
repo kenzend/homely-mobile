@@ -1,0 +1,48 @@
+AbsoluteLayout {
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-color: #ffffff;
+  }
+  StackLayout {
+    width: 300;
+    padding: 10 16;
+    background-color: #ffffff;
+  }
+  Image {
+    margin-bottom: 20;
+    height: 70;
+  }
+  Button {
+      height: 40;
+      margin-bottom: 0;
+      font-weight: 500;
+  }
+  .btn-primary {
+    background-color: black;
+    color: white;
+    border-radius: 10;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  TextField {
+    color: black;
+    margin-bottom: 10;
+  }
+  .login_box {
+      border-color: black;
+      border-width: 3;
+      border-radius: 35;
+  }
+  .login_button {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+    width: 130;
+    height: 50;
+    border-radius: 30;
+    margin-top: 15;
+  }
+  .background_image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }

@@ -1,0 +1,39 @@
+<!--
+<AbsoluteLayout>
+    <StackLayout width="100%" height="100%"></StackLayout>
+    <StackLayout [left]="padding_to_center" top="30%"
+        backgroundColor="transparent">
+        <Image src="~/fonts/Homely_logo.png"></Image>
+    </StackLayout>
+    <StackLayout [left]="padding_to_center" top="175%" height="350"
+        class="form login_box">
+        <StackLayout marginTop="17"></StackLayout>
+        <TextField hint="Email Address" keyboardType="email"
+            autocorrect="false" autocapitalizationType="none"
+            class="input input-border"></TextField>
+        <TextField hint="Password" secure="true" class="input input-border">
+        </TextField>
+
+        <Button text="Sign In" class="btn btn-primary" (tap)="login()">
+        </Button>
+        <Button text="Sign up to be a Homie" class="btn btn-primary"
+            backgroundColor="#cccccc"></Button>
+        <Button text="Forgot your password?" marginTop="55" color="red"
+            androidElevation="0" backgroundColor="transparent">
+        </Button>
+    </StackLayout>
+    <StackLayout [left]="padding_to_center" top="120%"
+        backgroundColor="transparent">
+        <Image src="~/fonts/home_icon.png"></Image>
+    </StackLayout>
+</AbsoluteLayout>
+-->
+<StackLayout width="100%" height="100%" class="background_image"
+    backgroundImage="~/fonts/background.png">
+    <GridLayout width="100%" height="100%" rows="*" columns="*">
+        <Button row="0" col="0" class="login_button" text="Get Started" fontSize="16"
+            color="white" (tap)="login()" horizontalAlignment="center"
+            verticalAlignment="middle">
+        </Button>
+    </GridLayout>
+</StackLayout>
