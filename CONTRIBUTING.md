@@ -17,7 +17,7 @@ We use github to host code, to track issues and feature requests, as well as acc
 Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
 
 
-1  Claim the issue in github that you are working on. If the issue doesn’t exist, create one for it.
+1. Claim the issue in github that you are working on. If the issue doesn’t exist, create one for it.
 
 2. Fork the repo and create your branch from `master` by using `git checkout master` and `git checkout -b feature-branch name`.
 
@@ -56,14 +56,13 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 # Testing
 Frontend and Mobile:
 
-Make sure changes are sufficiently manually tested before issuing a pull request.
-
-Reference for making unit tests using mobile’s framework Nativescript: https://v6.docs.nativescript.org/angular/tooling/testing/testing
+- Make sure changes are sufficiently manually tested before issuing a pull request.
+- Reference for making unit tests using mobile’s framework Nativescript: https://v6.docs.nativescript.org/angular/tooling/testing/testing
 
 
 Backend: 
 
-Write unit tests for all new changes and make sure all changes still pass existing tests in the test suite before issuing a pull request.
+- Write unit tests for all new changes and make sure all changes still pass existing tests in the test suite before issuing a pull request.
 
 
 ## Use a Consistent Coding Style
